@@ -22,6 +22,8 @@ while (true) {
     let student = { name: name, score: score };
     studentsList.push(student);  
 }
+const cleanScores = (list) =>
+    list.filter(s => s.score >= 0 && s.score <= 100);
 
 
 

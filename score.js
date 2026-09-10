@@ -21,3 +21,27 @@ const cleanScores = (list) =>
     !Number.isNaN(s.score) &&
     s.score >= 0 && s.score <= 100
   );
+
+// ===== 统计函数 =====
+
+// 平均分：用 reduce 求和后除以人数，空数组返回 0 防止除零
+const average = (list) => {
+  if (list.length === 0) return 0;
+  const total = list.reduce((sum, s) => sum + s.score, 0);
+  return (total / list.length).toFixed(2);
+};
+
+// 最高分：用 reduce 逐个比较，返回完整对象
+const highest = (list) =>
+  list.reduce((max, s) => (s.score > max.score ? s : max), list[0]);
+
+// 不及格名单：用 filter 筛选后 map 提取姓名
+const failedNames = (list) =>
+  list.filter(s => s.score < 60).map(s => s.name);
+
+// 初步验证（开发阶段自测）
+const validStudents = cleanScores(students);
+console.log('清洗后有效数据：', validStudents);
+console.log('平均分：', average(validStudents));
+console.log('最高分：', highest(validStudents));
+console.log('不及格名单：', failedNames(validStudents));

@@ -25,5 +25,19 @@ while (true) {
 const cleanScores = (list) =>
     list.filter(s => s.score >= 0 && s.score <= 100);
 
+const average = (list) => {
+    if (list.length === 0) return 0;
+    const total = list.reduce((sum, s) => sum + s.score, 0);
+    return (total / list.length).toFixed(2);
+};
 
+
+const failedNames = (list) =>
+    list.filter(s => s.score < 60).map(s => s.name);
+
+const valid = cleanScores(studentsList);
+console.log("全部记录：", studentsList);
+console.log("有效记录：", valid);
+console.log("平均分：", average(valid));
+console.log("不及格名单：", failedNames(valid));        
 
